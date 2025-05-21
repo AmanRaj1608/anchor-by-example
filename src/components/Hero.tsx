@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import Image from 'next/image'
 import clsx from 'clsx'
-import Highlight, { defaultProps } from 'prism-react-renderer'
+import { Highlight, themes } from 'prism-react-renderer'
 
 import { ButtonLink } from '@/components/Button'
 import { HeroBackground } from '@/components/HeroBackground'
@@ -134,18 +134,11 @@ export function Hero() {
                       ))}
                     </div>
                     <Highlight
-                      {...defaultProps}
                       code={code}
                       language={codeLanguage}
-                      theme={undefined}
+                      theme={themes.nightOwl}
                     >
-                      {({
-                        className,
-                        style,
-                        tokens,
-                        getLineProps,
-                        getTokenProps,
-                      }) => (
+                      {({ className, style, tokens, getLineProps, getTokenProps }) => (
                         <pre
                           className={clsx(
                             className,
@@ -154,12 +147,12 @@ export function Hero() {
                           style={style}
                         >
                           <code className="px-4">
-                            {tokens.map((line, index) => (
-                              <div key={index} {...getLineProps({ line })}>
-                                {line.map((token, index) => (
+                            {tokens.map((line, lineIndex) => (
+                              <div key={lineIndex} {...getLineProps({ line, key: lineIndex })}>
+                                {line.map((token, tokenIndex) => (
                                   <span
-                                    key={index}
-                                    {...getTokenProps({ token })}
+                                    key={tokenIndex}
+                                    {...getTokenProps({ token, key: tokenIndex })}
                                   />
                                 ))}
                               </div>
