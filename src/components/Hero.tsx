@@ -144,14 +144,15 @@ export function Hero() {
                             className,
                             'flex overflow-x-auto pb-6'
                           )}
-                          style={style}
+                          style={{ ...style }}
+                          tabIndex={0}
                         >
-                          <code className="px-4">
+                          <code className={`px-4 language-${codeLanguage}`}>
                             {tokens.map((line, lineIndex) => (
-                              <div key={lineIndex} {...getLineProps({ line, key: lineIndex })}>
+                              <div key={`line-${lineIndex}`} {...getLineProps({ line, key: lineIndex })}>
                                 {line.map((token, tokenIndex) => (
                                   <span
-                                    key={tokenIndex}
+                                    key={`token-${lineIndex}-${tokenIndex}`}
                                     {...getTokenProps({ token, key: tokenIndex })}
                                   />
                                 ))}

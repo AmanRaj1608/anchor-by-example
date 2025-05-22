@@ -42,7 +42,7 @@ export function Code({ children, language }: CodeProps) {
         ref={ref}
         className={`language-${lang}`}
         tabIndex={0}
-        data-language={language}
+        data-language={language || ''}
       >
         {children}
       </pre>

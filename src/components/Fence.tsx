@@ -13,13 +13,13 @@ export function Fence({ children, language = 'jsx' }: FenceProps) {
       code={children.trimEnd()}
       language={language as any}
     >
-      {({ className, style, tokens, getTokenProps }) => (
-        <pre className={className} style={style}>
-          <code>
+      {({ className, style, tokens, getTokenProps, getLineProps }) => (
+        <pre className={className} style={{ ...style }} tabIndex={0}>
+          <code className={`language-${language}`}>
             {tokens.map((line, lineIndex) => (
               <Fragment key={lineIndex}>
                 {line.map((token, tokenIndex) => (
-                  <span key={tokenIndex} {...getTokenProps({ token })} />
+                  <span key={`${lineIndex}-${tokenIndex}`} {...getTokenProps({ token, key: tokenIndex })} />
                 ))}
                 {'\n'}
               </Fragment>
